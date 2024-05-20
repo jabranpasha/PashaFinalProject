@@ -1,4 +1,5 @@
 import java.awt.event.MouseListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.imageio.ImageIO;
@@ -11,22 +12,23 @@ import java.awt.Font;
 import java.io.*;
 public class DrawPanel extends JPanel implements MouseListener {
     private Rectangle start = new Rectangle (360, 400, 200, 75);
-
+    private BufferedImage CurrentScreen;
+    private File StartScreen = new File("images/Title Card.png");
+    private File GameScreen = new File("images/Untitled.png");
     public DrawPanel() {
 
 
     }
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g, File f) {
         super.paintComponent(g);
         int x = 0;
         int y = 0;
-        BufferedImage image = null;
         try {
-            image = ImageIO.read(new File("images/Title Card.png"));
+            CurrentScreen = ImageIO.read(f);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        g.drawImage(image, 0, 0, null);
+        g.drawImage(CurrentScreen, 0, 0, null);
     }
 
 
@@ -35,6 +37,10 @@ public class DrawPanel extends JPanel implements MouseListener {
         Point clicked = e.getPoint();
 
         if (e.getButton() == 1) { // IF LEFT CLICK
+            if (start.contains(clicked)){
+                paintComponent(g, GameScreen);
+
+            }
 
 
             }
