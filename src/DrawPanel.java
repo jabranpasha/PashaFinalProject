@@ -14,7 +14,7 @@ public class DrawPanel extends JPanel implements MouseListener {
     private Rectangle start = new Rectangle (360, 400, 200, 75);
     private BufferedImage CurrentScreen;
     private String StartScreen = "Title Card";
-    private String GameScreen = "Untitled";
+    private String GameScreen = "Background";
     private String CurrentImage;
     public DrawPanel() {
         this.addMouseListener(this);
