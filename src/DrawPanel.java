@@ -32,7 +32,7 @@ public class DrawPanel extends JPanel implements MouseListener {
             throw new RuntimeException(e);
         }
         g.drawImage(CurrentScreen, 0, 0, null);
-        g.drawRect(360, 400, 200, 75);
+        g.drawRect(690, 530, 425, 140);
     }
 
 
@@ -44,7 +44,8 @@ public class DrawPanel extends JPanel implements MouseListener {
             if (start.contains(clicked)){
                 CurrentImage = GameScreen;
 
-
+            }
+            if (controls.contains(clicked)){
             }
 
 
