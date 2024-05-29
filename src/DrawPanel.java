@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.io.*;
 public class DrawPanel extends JPanel implements MouseListener {
     private Rectangle start = new Rectangle (360, 400, 200, 75);
+    private Rectangle controls = new Rectangle (100,100,100,100);
     private BufferedImage CurrentScreen;
     private String StartScreen = "Title Card";
     private String GameScreen = "Background";
@@ -31,6 +32,7 @@ public class DrawPanel extends JPanel implements MouseListener {
             throw new RuntimeException(e);
         }
         g.drawImage(CurrentScreen, 0, 0, null);
+        g.drawRect(360, 400, 200, 75);
     }
 
 
