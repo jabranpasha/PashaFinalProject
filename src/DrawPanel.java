@@ -19,6 +19,7 @@ public class DrawPanel extends JPanel implements MouseListener {
     private String ControlScreen = "Controls";
     private String GameScreen = "Background";
     private String CurrentImage;
+    private BufferedImage PacmanRight;
     public DrawPanel() {
         this.addMouseListener(this);
         CurrentImage = StartScreen;
@@ -34,6 +35,7 @@ public class DrawPanel extends JPanel implements MouseListener {
             throw new RuntimeException(e);
         }
         g.drawImage(CurrentScreen, 0, 0, null);
+        g.drawImage(PacmanRight, 200, 200,null);
     }
 
 
