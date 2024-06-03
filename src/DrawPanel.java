@@ -28,6 +28,10 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener {
     private String PacManDown ="Pacman down";
     private String PacManUp = "Pacman up";
     private String blank = "blank";
+    private int xVelocity;
+    private int yVelocity;
+
+
     private int x;
     private int y;
     public DrawPanel() {
@@ -53,6 +57,8 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener {
         }
         pressedKeys = new boolean[128];
         g.drawImage(CurrentScreen, 0, 0, null);
+        x += xVelocity;
+        y += yVelocity;
         g.drawImage(PacMan, x, y,null);
     }
 
@@ -100,24 +106,26 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener {
         pressedKeys[key] = true;
         if (pressedKeys[38]){
             CurrentPacMan = PacManUp;
-            y-=20;
+            yVelocity = -5;
+            xVelocity = 0;
 
         }
         if (pressedKeys[37]){
             CurrentPacMan = PacManLeft;
-            x-=20;
+            xVelocity = -5;
+            yVelocity = 0;
         }
         if (pressedKeys[40]){
             CurrentPacMan = PacManDown;
-            y+=20;
+            yVelocity = 5;
+            xVelocity = 0;
         }
         if (pressedKeys[39]){
             CurrentPacMan = PacManRight;
-            x+=20;
+            yVelocity = 0;
+            xVelocity = 5;
         }
-
-
-    }
+        }
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
