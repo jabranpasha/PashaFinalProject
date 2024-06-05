@@ -1,9 +1,7 @@
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import javax.swing.JPanel;
+import java.awt.event.*;
+import javax.swing.*;
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Point;
@@ -11,7 +9,7 @@ import java.awt.image.*;
 import java.util.*;
 import java.awt.Font;
 import java.io.*;
-public class DrawPanel extends JPanel implements MouseListener, KeyListener {
+public class DrawPanel extends JPanel implements MouseListener, KeyListener, ActionListener {
     private boolean[] pressedKeys;
     private Button start = new Button (690 ,530 ,425 ,140, true);
     private Button controls = new Button (190 ,530 ,425 ,140, true);
@@ -27,9 +25,13 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener {
     private String PacManLeft = "Pacman left";
     private String PacManDown ="Pacman down";
     private String PacManUp = "Pacman up";
+    private String PacManClosed = "Pacman Closed";
     private String blank = "blank";
     private int xVelocity;
     private int yVelocity;
+    private Timer timer;
+    private int time;
+    private boolean isMoving;
 
 
     private int x;
@@ -41,6 +43,10 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener {
         requestFocusInWindow();
         CurrentImage = StartScreen;
         CurrentPacMan = blank;
+        time = 0;
+        timer = new Timer(100, this);
+        timer.start();
+        isMoving = false;
         x = 626;
         y = 300;
 
@@ -106,22 +112,25 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener {
         pressedKeys[key] = true;
         if (pressedKeys[38]){
             CurrentPacMan = PacManUp;
+            isMoving = true;
             yVelocity = -5;
             xVelocity = 0;
-
         }
         if (pressedKeys[37]){
             CurrentPacMan = PacManLeft;
+            isMoving = true;
             xVelocity = -5;
             yVelocity = 0;
         }
         if (pressedKeys[40]){
             CurrentPacMan = PacManDown;
+            isMoving = true;
             yVelocity = 5;
             xVelocity = 0;
         }
         if (pressedKeys[39]){
             CurrentPacMan = PacManRight;
+            isMoving = true;
             yVelocity = 0;
             xVelocity = 5;
         }
@@ -130,5 +139,16 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener {
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         pressedKeys[key] = false;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String x = CurrentPacMan;
+        if (e.getSource() instanceof Timer){
+            time++;
+            if (isMoving){
+                CurrentPacMan = PacManClosed;
+            }
+        }
     }
 }
