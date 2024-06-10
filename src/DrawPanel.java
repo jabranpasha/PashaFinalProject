@@ -22,10 +22,12 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener, Act
     private String ControlScreen = "Controls";
     private String GameScreen = "Background";
     private String PacManRight = "Pacman right";
+    private String PacManRightC = "Pacman rightC";
     private String PacManLeft = "Pacman left";
     private String PacManDown ="Pacman down";
     private String PacManUp = "Pacman up";
-    private String PacManClosed = "Pacman Closed";
+    private String PacManClosedR = "Pacman ClosedR";
+    private String PacManClosedL = "Pacman ClosedL";
     private String blank = "blank";
     private int xVelocity;
     private int yVelocity;
@@ -112,24 +114,42 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener, Act
         pressedKeys[key] = true;
         if (pressedKeys[38]){
             CurrentPacMan = PacManUp;
+            if (time % 3 == 0){
+                CurrentPacMan =PacManClosedR;
+                }
             isMoving = true;
             yVelocity = -5;
             xVelocity = 0;
         }
         if (pressedKeys[37]){
             CurrentPacMan = PacManLeft;
+            if (time % 3 == 0){
+                CurrentPacMan =PacManClosedR;
+            }
             isMoving = true;
             xVelocity = -5;
             yVelocity = 0;
         }
         if (pressedKeys[40]){
             CurrentPacMan = PacManDown;
+            if (time % 3 == 0){
+                CurrentPacMan =PacManClosedR;
+            }
             isMoving = true;
             yVelocity = 5;
             xVelocity = 0;
         }
         if (pressedKeys[39]){
             CurrentPacMan = PacManRight;
+            if (time % 3 == 0){
+                CurrentPacMan =PacManClosedR;
+            }
+            if (time % 6 ==0){
+                CurrentPacMan = PacManRightC;
+            }
+            if (time % 8 == 0){
+                CurrentPacMan = PacManRight;
+            }
             isMoving = true;
             yVelocity = 0;
             xVelocity = 5;
@@ -143,12 +163,8 @@ public class DrawPanel extends JPanel implements MouseListener, KeyListener, Act
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String x = CurrentPacMan;
         if (e.getSource() instanceof Timer){
             time++;
-            if (isMoving){
-                CurrentPacMan = PacManClosed;
-            }
         }
     }
 }
